@@ -14,15 +14,24 @@
 
             <br>
 
-            <h4>
-                Click Me To Show the Date!
-            </h4>
+            <label>Count is: {{count}}</label>
+
+            <br>
+
+            <button v-on:click="count++">Increment</button>
+
+            <br>     
+            <br>
+            <br>
+            <br>
+
+             <a @click="handleClick()">Click Me For An Alert!</a>
 
         </section>
 
-   <br>
-   <br>
-   <br>
+        <br>
+        <br>
+        <br>
 
     </article>
 
@@ -37,13 +46,21 @@ export default {
     name: 'Events',
        data ()  {
         return  {
-            hide: false
+            hide: false,
+            count: 0
         }
+        
+   
+  
     },
     methods:  {
         Hide ()  {
             this.hide = !this.hide;
-        }
+        },
+        handleClick () {
+      alert("Thanks for Clicking!");
+     
+    }
     }
   
    
