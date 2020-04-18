@@ -1,93 +1,87 @@
 <template>
-    
-<section>
+
+  <section>
 
     <h2>My Vue Playlist</h2>
 
-    <form @submit="addNewSong" >
+    <h3>Add a New Song:</h3>
 
-        <label for="new-song">
-           Enter A Song Name 
-           <br>
-            <input type="text" name="new-song" v-model="newSong">
-        </label>
-            <br>
-          <label for="new-artist">
-            Enter The Name Of The Artisit
-            <br>
-            <input type="text" name="new-artisit" v-model="newArtist">
-        </label>
-            <br>
-        <input type="submit" value="Submit">
-
+    <form @submit="addSong">
+      <label for="new-song">
+        Song:
+        <input type="text" name="title" v-model="newSong" />
+        <br>
+        <br>
+        Artist:
+        <input type="text" name="artist" v-model="newArtist" />
+        <br>
+      </label>
+      <input type="submit" value="Submit" />
     </form>
 
-    <h3> Your Custom Playlist! </h3>
+    <br>
+    <br>
 
-    <ul>
-        <Song v-for="song in songs" :key="song.task" :task="song.task" :song="song" />
-        <Artist v-for="artist in artists" :key="artist.task" :task="artist.task" :artist="artist" />
+    <ul class="my-list">
+      <Song v-for="song in songs" :key="song.title" :song="song" v-on:delete-song="removeSong"/>
     </ul>
 
-   
-
-</section>
+  </section>
 
 </template>
 
-
-
 <script>
-import Song from './Song.vue';
-import Artist from './Artist.vue';
-
+import Song from "./Song.vue";
 export default {
-    name: 'VuePlaylist',
-    components:  {
-        Song,
-        Artist
+  name: "Playlist",
+  components: {
+    Song
+  },
+  data() {
+    return {
+      newSong: "",
+      newArtist: "",
+      songs: [
+        {
+          title: 'Moonshine',
+          artist: 'Caravan Palace',
+        },
+          {
+          title: 'Trapped',
+          artist: 'Underworld & Iggy Pop',
+        },
+          {
+          title: 'Danheim',
+          artist: 'Folkvangr',
+        },
+      ]
+    };
+  },
+  methods: {
+    addSong(event) {
+      event.preventDefault();
+      const newSong = this.newSong;
+      const newArtist = this.newArtist;
+      this.songs.push({
+        title: newSong,
+        artist: newArtist,
+      
+      });
+      this.newSong = ""; 
+      this.newArtist = "";
     },
-    data () {
-        return {
-            newSong: '',
-            newArtist: '',
-            songs: [],
-            artists: []
-            
-        }
-    },
-    methods:  {
-        addNewSong ( event )  {
-            event.preventDefault();
-            const newSong = this.newSong;
-            this.songs.push( {
-                task: newSong,
-                
-            } );
-            this.newSong = '';
-            const newArtist = this.newArtist;
-            this.artists.push( {
-                task: newArtist,
-                
-            } );
-            this.newArtist = '';
-        }
-    },
-         addNewArtist ( event )  {
-            event.preventDefault();
-            const newArtist = this.newArtist;
-            this.artists.push( {
-                task: newArtist,
-                
-            } );
-            this.newArtist = '';
-        }
-   
-}
+    removeSong(song) {
+      const songIndex = this.songs.indexOf(song);
+      this.songs.splice(songIndex, 1);
+    }
+  }
+};
 </script>
 
-
-
 <style>
+
+.my-list li  {
+    list-style-type:none;
+}
 
 </style>
