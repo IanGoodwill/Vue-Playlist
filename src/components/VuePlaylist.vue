@@ -54,8 +54,8 @@ export default {
           favorite: true
         },
           {
-          title: 'Danheim',
-          artist: 'Folkvangr',
+          title: 'Folkvangr',
+          artist: 'Danheim',
           favorite: true
         },
       ]
@@ -93,8 +93,5 @@ export default {
     list-style-type:none;
 }
 
-.liked-song {
-    font-style: italic;
-    font-weight: bold;
-  }
+
 </style>
