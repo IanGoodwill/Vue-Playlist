@@ -1,9 +1,11 @@
 
 <template>
+
   <li>
    <strong> {{song.title}} </strong> by <strong> {{song.artist}} </strong>
-    <button v-on:click="deleteSong( song )">Remove Song</button>
+    <button v-on:click="deleteSong( song )">Delete Song</button>
   </li>
+  
 </template>
 
 <script>

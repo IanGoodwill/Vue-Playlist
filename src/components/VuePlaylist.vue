@@ -8,11 +8,11 @@
 
     <form @submit="addSong">
       <label for="new-song">
-        Song:
+        Song:  
         <input type="text" name="title" v-model="newSong" />
         <br>
         <br>
-        Artist:
+        Artist:  
         <input type="text" name="artist" v-model="newArtist" />
         <br>
       </label>
@@ -23,7 +23,7 @@
     <br>
 
     <ul class="my-list">
-      <Song v-for="song in songs" :key="song.title" :song="song" v-on:delete-song="removeSong"/>
+      <Song v-for="song in songs" :key="song.title" :song="song" v-on:delete-song="deleteSong"/>
     </ul>
 
   </section>
@@ -70,7 +70,7 @@ export default {
       this.newSong = ""; 
       this.newArtist = "";
     },
-    removeSong(song) {
+    deleteSong(song) {
       const songIndex = this.songs.indexOf(song);
       this.songs.splice(songIndex, 1);
     }
