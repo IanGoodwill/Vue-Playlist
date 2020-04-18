@@ -23,7 +23,8 @@
     <br>
 
     <ul class="my-list">
-      <Song v-for="song in songs" :key="song.title" :song="song" v-on:delete-song="deleteSong"/>
+      <Song v-for="song in songs" :key="song.title" :song="song" v-on:delete-song="deleteSong"  v-on:like-song="likeSong"
+          :class="{'liked-song' : song.favorite}"/>
     </ul>
 
   </section>
@@ -45,14 +46,17 @@ export default {
         {
           title: 'Moonshine',
           artist: 'Caravan Palace',
+          favorite: true
         },
           {
           title: 'Trapped',
           artist: 'Underworld & Iggy Pop',
+          favorite: true
         },
           {
           title: 'Danheim',
           artist: 'Folkvangr',
+          favorite: true
         },
       ]
     };
@@ -65,10 +69,15 @@ export default {
       this.songs.push({
         title: newSong,
         artist: newArtist,
+        favorite: false
       
       });
       this.newSong = ""; 
       this.newArtist = "";
+    },
+    likeSong(song) {
+      const faveIndex = this.songs.indexOf(song);
+      this.songs[faveIndex].favorite = !this.songs[faveIndex].favorite;
     },
     deleteSong(song) {
       const songIndex = this.songs.indexOf(song);
@@ -84,4 +93,8 @@ export default {
     list-style-type:none;
 }
 
+.liked-song {
+    font-style: italic;
+    font-weight: bold;
+  }
 </style>
